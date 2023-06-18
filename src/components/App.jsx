@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from "react";
 import { ContactForm } from "./ContactForm/ContactForm";
 import { Filter } from "./Filter/Filter";
@@ -29,7 +30,7 @@ export const App = () => {
       setContacts(prevContacts => [...prevContacts, newContact]);
     }
     else {
-      alert(`${name} is already in contacts`)
+      toast.error(`${name} is already in contacts`);
     }
   };
 
@@ -51,6 +52,9 @@ export const App = () => {
     <SectionTitle>Contacts</SectionTitle>
     <Filter onFilterChange={onFilterChange} value={filter} />
     {filterContacts().length ? <ContactList contacts={filterContacts()} onDeleteBtnClick={deleteContact} /> : null}
+    <Toaster
+      position="top-right"
+      toastOptions={{ duration: 2000 }} />
   </>
     
 };
